@@ -20,15 +20,19 @@ On the machines in the parallel lab, compile your OpenMP code as follows:
 g++ -march=native -O3 -fopenmp fractal_omp.cpp -o fractal_cyc -DSCHED="static,1"
 g++ -march=native -O3 -fopenmp fractal_omp.cpp -o fractal_dyn -DSCHED="dynamic,1"
 g++ -march=native -O3 -fopenmp fractal_omp.cpp -o fractal_gui -DSCHED="guided,1"
+
 On Stampede, compile your OpenMP code as follows:
+
 icc -xhost -O3 -openmp fractal_omp.cpp -o fractal_cyc -DSCHED="static,1"
 icc -xhost -O3 -openmp fractal_omp.cpp -o fractal_dyn -DSCHED="dynamic,1"
 icc -xhost -O3 -openmp fractal_omp.cpp -o fractal_gui -DSCHED="guided,1"
-2
+
+
+
 
 Run the code using the submission script at /home1/00976/burtsche/Parallel/fractal_omp.sub. Do
-not modify this script
-.
+not modify this script.
+
 Question 4.1a) What runtimes do you get (in seconds)? Present the runtimes in a table for the
 cyclic, dynamic, and guided schedules from left to right and “increasing” problem sizes from top
 to bottom. Use three digits after the decimal point.
