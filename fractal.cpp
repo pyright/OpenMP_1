@@ -35,14 +35,24 @@ int main(int argc, char *argv[])
   printf("Fractal v1.6 [serial]\n");
 
   // check command line
-  if (argc != 3) {fprintf(stderr, "usage: %s frame_width num_frames\n", argv[0])
-; exit(-1);}
+  if (argc != 3) {
+    fprintf(stderr, "usage: %s frame_width num_frames\n", argv[0]); 
+    exit(-1);
+  }
   int width = atoi(argv[1]);
-  if (width < 10) {fprintf(stderr, "error: frame_width must be at least 10\n");
-exit(-1);}
+  
+  if (width < 10) {
+    fprintf(stderr, "error: frame_width must be at least 10\n");
+    exit(-1);
+  }
+  
   int frames = atoi(argv[2]);
-  if (frames < 1) {fprintf(stderr, "error: num_frames must be at least 1\n"); ex
-it(-1);}
+  
+  if (frames < 1) {
+    fprintf(stderr, "error: num_frames must be at least 1\n");
+    exit(-1);
+  }
+  
   printf("computing %d frames of %d by %d fractal\n", frames, width, width);
 
   // allocate picture array
@@ -50,10 +60,12 @@ it(-1);}
 
   // start time
   timeval start, end;
+  
   gettimeofday(&start, NULL);
 
   // compute frames
   double delta = Delta;
+  
   for (int frame = 0; frame < frames; frame++) {
     const double xMin = xMid - delta;
     const double yMin = yMid - delta;
@@ -81,8 +93,7 @@ it(-1);}
 
   // end time
   gettimeofday(&end, NULL);
-  double runtime = end.tv_sec + end.tv_usec / 1000000.0 - start.tv_sec - start.t
-v_usec / 1000000.0;
+  double runtime = end.tv_sec + end.tv_usec / 1000000.0 - start.tv_sec - start.tv_usec / 1000000.0;
   printf("compute time: %.4f s\n", runtime);
 
   // verify result by writing frames to BMP files
