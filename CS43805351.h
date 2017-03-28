@@ -23,18 +23,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 Author: Martin Burtscher
 */
 
-#ifndef CS43805351
-#define CS43805351
+#ifndef cs43805351
+#define cs43805351
 
 #include <stdio.h>
 #include <assert.h>
 
-static void writeBMP(const int x, const int y, const unsigned char* const bmp, c
-onst char* const name)
-{
-  const unsigned char bmphdr[54] = {66, 77, 255, 255, 255, 255, 0, 0, 0, 0, 54,
-4, 0, 0, 40, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 1, 0, 8, 0, 0, 0,
-0, 0, 255, 255, 255, 255, 196, 14, 0, 0, 196, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+static void writeBMP(const int x, const int y, const unsigned char* const bmp, const char* const name) {
+  const unsigned char bmphdr[54] = {66, 77, 255, 255, 255, 255, 0, 0, 0, 0, 54, 4, 0, 0, 40, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 1, 0, 8, 0, 0, 0, 0, 0, 255, 255, 255, 255, 196, 14, 0, 0, 196, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   unsigned char hdr[1078];
   int i, j, c, xcorr, diff;
   FILE* f;
@@ -47,6 +43,7 @@ onst char* const name)
   *((int*)(&hdr[22])) = y;
   *((int*)(&hdr[34])) = xcorr * y;
   *((int*)(&hdr[2])) = xcorr * y + 1078;
+  
   for (i = 0; i < 256; i++) {
     j = i * 4 + 54;
     hdr[j+0] = i;  // blue
