@@ -1,13 +1,10 @@
 /*
 Fractal code for CS 4380 / CS 5351
-
 Copyright (c) 2017, Texas State University. All rights reserved.
-
 Redistribution in source or binary form, with or without modification,
 is not permitted. Use in source and binary forms, with or without
 modification, is only permitted for academic use in CS 4380 or CS 5351
 at Texas State University.
-
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -18,7 +15,6 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
 ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 Author: Martin Burtscher
 */
 
@@ -32,7 +28,7 @@ static const double yMid =  0.521;
 
 int main(int argc, char *argv[])
 {
-  printf("Fractal v1.6 [serial]\n");
+  printf("Fractal v1.6 [OpenMP]\n");
 
   // check command line
   if (argc != 3) {
@@ -66,31 +62,74 @@ int main(int argc, char *argv[])
   // compute frames
   double delta = Delta;
   
+  
+  
+  
+  
+  
+  
+  
   for (int frame = 0; frame < frames; frame++) {
     const double xMin = xMid - delta;
     const double yMin = yMid - delta;
     const double dw = 2.0 * delta / width;
-    for (int row = 0; row < width; row++) {
+	
+	
+	
+	
+	
+	
+	
+	
+	//PRAGMA SHIT GO HERE BBCAKES
+    for (int row = 0; row < width; row++) {///////////////////////   START of structured block
+	
       const double cy = yMin + row * dw;
-      for (int col = 0; col < width; col++) {
-        const double cx = xMin + col * dw;
-        double x = cx;
-        double y = cy;
-        int depth = 256;
-        double x2, y2;
-        do {
+	  
+      for (int col = 0; col < width; col++) {///////////// FOR
+		  
+        const double cx = xMin + col * dw; // constant
+        double x = cx;                     //
+        double y = cy;                     // Variables
+        int depth = 256;                   //
+        double x2, y2;                     //
+		
+		
+        do {   //I probably need some lock                    ////////////////// DO-WHILE START
           x2 = x * x;
           y2 = y * y;
           y = 2 * x * y + cy;
           x = x2 - y2 + cx;
           depth--;
-        } while ((depth > 0) && ((x2 + y2) < 5.0));
+        } while ((depth > 0) && ((x2 + y2) < 5.0));//////////////// DO-WHILE END
+		
+	
         pic[frame * width * width + row * width + col] = (unsigned char)depth;
       }
-    }
+	  
+	  
+    }///////////////////////////////////////////////////////////     END of the structured block
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     delta *= 0.98;
   }
 
+  
+  
+  
+  
+  
+  
   // end time
   gettimeofday(&end, NULL);
   double runtime = end.tv_sec + end.tv_usec / 1000000.0 - start.tv_sec - start.tv_usec / 1000000.0;
@@ -107,4 +146,3 @@ int main(int argc, char *argv[])
 
   delete [] pic;
   return 0;
-}
